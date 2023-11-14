@@ -15,7 +15,7 @@ class Customer(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.name or f"Customer {self.pk}"
     
 class Product(models.Model):
     name=models.CharField(max_length=200)
@@ -66,6 +66,14 @@ class Order(models.Model):
         return str(self.id)
     
     @property
+    def shipping(self):
+        shipping= False
+        orderitems = self.orderitem_set.all()
+        for i in orderitems:
+            if i.product.digital== False:
+                shipping= True
+        return shipping
+    @property
     def get_cart_total(self):
         orderitems=self.orderitem_set.all()
         total=sum([item.get_total for item in orderitems])
@@ -77,14 +85,6 @@ class Order(models.Model):
         total=sum([item.quantity for item in orderitems])
         return total
     
-    @property
-    def shipping(self):
-        shipping= False
-        orderitems = self.orderitem_set.all()
-        for i in orderitems:
-            if i.product.digital== False:
-                shipping= True
-        return shipping
     
 class OrderItem(models.Model):
     product=models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
@@ -104,6 +104,7 @@ class Shipping_Address(models.Model):
     city=models.CharField(max_length=200, null=False)
     state=models.CharField(max_length=200, null=False)
     zipcode=models.CharField(max_length=200, null=False)
+    country=models.CharField(max_length=200, null=False, default=True)
     date_added=models.DateTimeField(auto_now_add=True)
     contact=models.IntegerField(null=False)
     

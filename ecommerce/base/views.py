@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
+import uuid
 import json
+import datetime
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 
 #home function
@@ -14,8 +18,8 @@ def Home(request):
         
     else:
         items=[]
-        cartItems=order['get_cart_items']
         order={'get_cart_total':0, 'get_cart_items':0}
+        cartItems=order['get_cart_items']
         
     context={'items':items, 'order':order, 'cartItems': cartItems}
     return render(request, 'base/home.html', context)
@@ -30,9 +34,9 @@ def Cart(request):
 
     else:
         items= []
+        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
         cartItems=order['get_cart_items']
 
-        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
     context={'items':items, 'order':order,'cartItems':cartItems}
     return render(request, 'base/cart.html', context)
 
@@ -54,6 +58,7 @@ def Store(request):
     return render(request, 'base/store.html', context)
 
 #checkout function
+
 def Checkout(request):
     if request.user.is_authenticated:
         customer=request.user.customer
@@ -87,3 +92,35 @@ def updateItem(request):
     if orderItem.quantity<=0:
         orderItem.delete()
     return JsonResponse('item is added', safe=False)
+
+@csrf_exempt
+def processOrder(request):
+    # transaction_id = str(uuid.uuid4())
+    transaction_id=datetime.datetime.now().timestamp()
+    data= json.loads(request.body)
+    
+    if request.user.is_authenticated:
+        customer=request.user.customer
+        order,created=Order.objects.get_or_create(customer=customer, complete=False)
+        total=float(data['form']['total'])
+        order.transaction_id = transaction_id
+        
+        if total == order.get_cart_total:
+            order.complete=True
+        order.save()
+        
+        if order.shipping== True:
+            Shipping_Address.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+                zipcode=data['shipping']['zipcode'],
+                country=data['shipping']['country'],
+                contact=data['shipping']['contact'],
+            )
+    else:
+        print("User is not logged in")
+    return JsonResponse('Payment Done', safe=False)
+
