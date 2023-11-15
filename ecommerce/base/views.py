@@ -33,9 +33,12 @@ def Cart(request):
         cartItems=order.get_cart_items
 
     else:
-        items= []
+        cart = json.loads(request.COOKIES.get('cart', '{}'))
+        print('Cart: ', cart)
+        items = []
         order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems=order['get_cart_items']
+
+        cartItems = sum(item['quantity'] for item in cart.values())
 
     context={'items':items, 'order':order,'cartItems':cartItems}
     return render(request, 'base/cart.html', context)
@@ -48,9 +51,12 @@ def Store(request):
         items=order.orderitem_set.all()
         cartItems=order.get_cart_items
     else:
-        items=[]
-        order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems=order['get_cart_items']
+        cart = json.loads(request.COOKIES.get('cart', '{}'))
+        print('Cart: ', cart)
+        items = []
+        # order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
+
+        cartItems = sum(item['quantity'] for item in cart.values())
     
     product=Product.objects.all()
     
@@ -66,9 +72,12 @@ def Checkout(request):
         items=order.orderitem_set.all()
         cartItems=order.get_cart_items
     else:
+        cart=json.loads(request.COOKIES.get('cart','{}'))
+        print('Cart ',cart)
         items=[]
         order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-        cartItems=order['get_cart_items']
+        cartItems=sum(item['quantity'] for item in cart.values())
+        
     context={'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'base/checkout.html', context)
 

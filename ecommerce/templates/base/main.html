@@ -27,7 +27,28 @@
 			}
    			return cookieValue;
 		}
-const csrftoken = getToken('csrftoken');
+		var csrftoken = getToken('csrftoken');
+		function getCookie(name) {
+			var cookieValue = null;
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i].trim();
+				var cookiePair = cookie.split('=');
+				if (name == cookiePair[0]) {
+					return decodeURIComponent(cookiePair[1]);
+				}
+			}
+			return null;
+}
+
+		var cart= JSON.parse(getCookie('cart'))
+
+		if(!cart ){
+			cart={}
+			console.log('Cart Created! ')
+			document.cookie='cart= '+JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:,', cart)
 	</script>
 
 </head>
@@ -76,5 +97,6 @@ const csrftoken = getToken('csrftoken');
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="{% static 'js/cart.js'%}"></script>
+
 </body>
 </html>

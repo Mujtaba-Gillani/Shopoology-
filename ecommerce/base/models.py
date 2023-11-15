@@ -19,7 +19,7 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name=models.CharField(max_length=200)
-    price=models.IntegerField()
+    price=models.DecimalField(decimal_places=2, max_digits=7)
     digital=models.BooleanField(default=False, null=True, blank=True)  # buy default every item is physical  
     image=models.ImageField(null=True, blank=True)
     
