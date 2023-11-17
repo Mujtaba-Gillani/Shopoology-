@@ -31,14 +31,33 @@ def Cart(request):
         order, created= Order.objects.get_or_create(customer=customer, complete=False)
         items=order.orderitem_set.all()
         cartItems=order.get_cart_items
+    
 
     else:
         cart = json.loads(request.COOKIES.get('cart', '{}'))
         print('Cart: ', cart)
         items = []
         order={'get_cart_total':0, 'get_cart_items':0, 'shipping': False}
-
-        cartItems = sum(item['quantity'] for item in cart.values())
+        cartItems=order['get_cart_items']
+        # cartItems = sum(item['quantity'] for item in cart.values())
+        for i in cart:
+            cartItems += cart[i]['quantity']
+            product= Product.objects.get(id=i)
+            total=(product.price * cart[i]['quantity'])
+            order['get_cart_total'] += total
+            order['get_cart_items']+=cart[i]['quantity']
+            
+            item={
+                'product':{
+                    'id':product.id,
+                    'name':product.name,
+                    'price':product.price,
+                    'imageURL':product.imageURL
+                },
+                'quantity':cart[i]['quantity'],
+                'get_total':total,
+            }
+            items.append(item)
 
     context={'items':items, 'order':order,'cartItems':cartItems}
     return render(request, 'base/cart.html', context)
@@ -86,8 +105,8 @@ def updateItem(request):
     data= json.loads(request.body)
     productId= data['productId']
     action = data['action']
-    print('Action: ', action)
-    print('Product: ', productId)
+    # print('Action: ', action)
+    # print('Product: ', productId)
     customer=request.user.customer
     product= Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -96,11 +115,31 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity +1)
     elif action == 'remove':    
         orderItem.quantity = (orderItem.quantity -1)
-        
     orderItem.save()
+    
+        
     if orderItem.quantity<=0:
         orderItem.delete()
-    return JsonResponse('item is added', safe=False)
+        
+    order_items=order.orderitem_set.all()
+    items=[{
+        'product':{
+            'id':item.product.id,
+            'name':item.product.name,
+            'price':item.product.price,
+            'imageURL':item.product.imageURL
+        },
+        'quantity':item.quantity,
+        'get_total':item.get_total,
+    } 
+        for item in order_items]
+    cart_info={
+            'get_cart_total':order.get_cart_total,
+            'get_cart_items':order.get_cart_items,
+            'shipping':order.shipping,
+        }
+    response_data={'items':items, 'order':cart_info}
+    return JsonResponse(response_data, safe=False)
 
 @csrf_exempt
 def processOrder(request):
