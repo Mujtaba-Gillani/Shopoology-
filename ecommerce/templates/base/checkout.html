@@ -48,6 +48,8 @@
         <br>
         <div class="box-element hidden" id="payment-info">
             <small>Paypal Options</small>
+                <div id="paypal-button-container"></div>
+
             <button id="make-payment">Make Payment</button>
         </div>
         
@@ -148,6 +150,8 @@
         .then((data) =>{
             console.log('Success:',data);
             alert('Transaction Completed')
+            cart={}
+            document.cookie='cart=' + JSON.stringify(cart)+ ";domain=;path=/"
             window.location.href="{% url 'store' %}"
         })
     }

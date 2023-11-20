@@ -39,34 +39,7 @@ function addCookieItem(productId, action) {
 }
     // Assuming you want to perform the action on elements with specific IDs
 
-    function updatePageContent(data) {
-        var itemNumbElement = document.getElementById('ItemNumb');
-        var totalNumbElement = document.getElementById('TotalNumb');
-        var quantityNumElement = document.getElementById('quantityNum');
-        var nettotalElement = document.getElementById('nettotal');
     
-        // Update the content of the elements based on the data
-        if (itemNumbElement) {
-            itemNumbElement.innerHTML = '<h5>Items: <strong>' + data.order.get_cart_items + '</strong></h5>';
-        }
-    
-        if (totalNumbElement) {
-            totalNumbElement.innerHTML = '<h5>Total:<strong> Rs.' + data.order.get_cart_total + '</strong></h5>';
-        }
-    
-        if (quantityNumElement) {
-            quantityNumElement.innerHTML = '<strong>Quantity:</strong>';
-        }
-    
-        if (nettotalElement) {
-            nettotalElement.innerHTML = '<strong>Total</strong>';
-        }
-    
-        // Call additional functions or perform other actions as needed
-        // ...
-    
-        alert('Content updated successfully!');
-    }
 
 function updateUserOrder(productId, action){
     // get div/element ids 
@@ -82,7 +55,7 @@ function updateUserOrder(productId, action){
         body:JSON.stringify({'productId':productId, 'action':action})
     })
     .then((response)=>{
-        // window.location.reload(true); // Force a full page reload
+        window.location.reload(true); // Force a full page reload
 
         return response.json();
     })
@@ -97,16 +70,12 @@ function updateUserOrder(productId, action){
     });
 }
 function updateCart(data) {
-    // Update the cart items count
     var cartElement = document.getElementById('cart');
     cartElement.innerHTML = 'Cart Items: ' + data.cartItems;
 
-    // Create a container for cart items
     var cartContainer = document.createElement('div');
 
-    // Check if there are items in the cart
     if (data.items.length > 0) {
-        // Iterate through items and update cart content
         data.items.forEach(function (item) {
             var itemDiv = document.createElement('div');
             itemDiv.innerHTML = `
@@ -117,41 +86,11 @@ function updateCart(data) {
             cartContainer.appendChild(itemDiv);
         });
     } else {
-        // Display a message if the cart is empty
         cartContainer.innerHTML = '<p>Your cart is empty</p>';
     }
 
-    // Append the cart content to the existing structure
     cartElement.appendChild(cartContainer);
 
-    // Call the function to update other page content
-    updatePageContent(data);
-
-    // Optionally, provide user feedback (e.g., a notification) about the cart update
     alert('Cart updated successfully!');
 }
 
-// Function to update specific elements on the page
-function updatePageContent(data) {
-    var itemNumbElement = document.getElementById('ItemNumb');
-    var totalNumbElement = document.getElementById('TotalNumb');
-    var quantityNumElement = document.getElementById('quantityNum');
-    var nettotalElement = document.getElementById('nettotal');
-
-    // Update the content of the elements based on the data
-    if (itemNumbElement) {
-        itemNumbElement.innerHTML = '<h5>Items: <strong>' + data.order.get_cart_items + '</strong></h5>';
-    }
-
-    if (totalNumbElement) {
-        totalNumbElement.innerHTML = '<h5>Total:<strong> Rs.' + data.order.get_cart_total + '</strong></h5>';
-    }
-
-    if (quantityNumElement) {
-        quantityNumElement.innerHTML = '<strong>Quantity:</strong>';
-    }
-
-    if (nettotalElement) {
-        nettotalElement.innerHTML = '<strong>Total</strong>';
-    }
-}
