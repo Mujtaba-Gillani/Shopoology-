@@ -1,0 +1,93 @@
+{%extends 'base/main.html'%}
+{% load static %}
+{% block title%}SignUp PAge{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}">
+
+    <div class="body">
+      <div class="wrapper"><h2>Registration</h2>
+      <div class="content">
+        <form method="post" action="{% url 'signup' %}">
+          {% csrf_token %}
+          <div class="user-details">
+            <div class="input-group">
+              <!-- <span class="details">Full Name</span> -->
+              <input type="text" name="fullname" required>
+              <label for="">Full Name</label>
+
+            </div>
+            <div class="input-group">
+              <!-- <span class="details">Username</span> -->
+              <input type="text" name="username" required>
+              <label for="">Username</label>
+
+            </div>
+            <div class="input-group">
+              <!-- <span class="details">Email</span> -->
+              <input type="text" name="email" required>
+              <label for="">Email</label>
+
+            </div>
+            <div class="input-group">
+              <!-- <span class="details">Phone Number</span> -->
+              <input type="text" name="PhoneNumber"  required>
+              <label for="">PhoneNumber</label>
+
+            </div>
+            <div class="input-group">
+              <!-- <span class="details">Password</span> -->
+              <input type="text" name="password1" required>
+              <label for="">Password</label>
+
+            </div>
+            <div class="input-group">
+              <!-- <span class="details">Confirm Password</span> -->
+              <input type="text" name="password2" required>
+              <label for="">Confirm Password</label>
+
+            </div>
+          </div>
+          <div class="input-groupp">
+            <label for="user_type"><h5>User Type:</h5></label>
+            <div id="user_type" class="radio-group" required>
+              <input type="radio" id="buyer" name="user_type" value="buyer">
+              <label for="buyer">Buyer</label>
+              
+              <input type="radio" id="seller" name="user_type" value="seller">
+              <label for="seller">Seller</label>
+            </div>
+          </div>
+
+
+
+          
+ <div class="gender-details">
+    <span class="gender-title"><h5>Gender</h5></span>
+  <div class="category">
+    <label for="dot-1" class="label">
+        <input type="radio" name="gender" id="dot-1" value="male">
+      <!-- <span class="dot one"></span> -->
+      <span class="gender">Male</span>
+    </label>
+    <label for="dot-2" class="label">
+        <input type="radio" name="gender" id="dot-2" value="female">
+      <!-- <span class="dot two"></span> -->
+      <span class="gender">Female</span>
+    </label>
+    <label for="dot-3" class="label">
+        <input type="radio" name="gender" id="dot-3" value="none">
+      <!-- <span class="dot three"></span> -->
+      <span class="gender">None</span>
+    </label>
+  </div>
+  
+</div>
+
+          <button type="submit">Regiter</button>
+
+        </form>
+      </div>
+    </div>
+    </div>
+
+{% endblock%}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import JsonResponse
 from .models import *
 import uuid
@@ -6,13 +6,17 @@ import json
 import datetime
 from .utils import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
 #home function
 def Home(request):
     if request.user.is_authenticated:
-        customer=request.user.customer
+        customer=get_object_or_404(Customer, user=request.user)
         order, created= Order.objects.get_or_create(customer=customer, complete=False)
         items=order.orderitem_set.all()
         cartItems=order.get_cart_items
@@ -131,3 +135,54 @@ def processOrder(request):
     )
     return JsonResponse('Payment Done', safe=False)
 
+
+
+def Login_view(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username, password=password)
+        
+        if user is not  None:
+            login(request, user)
+            return redirect('home')
+        
+    return render(request,'base/login.html')
+
+def SignUp_view(request):
+    context={}
+    if request.method=='POST':
+        form= UserCreationForm(request.POST)
+        if form.is_valid():
+            fullname=request.POST.get('fullname')
+            username=request.POST.get('username')
+            email=request.POST.get('email')
+            phoneNumber=request.POST.get('PhoneNumber')
+            password = form.cleaned_data.get('password1')
+            gender=request.POST.get('gender')
+
+            user=User.objects.create_user(username=username, email=email, password=password)
+            
+            user_profile=UserProfile.objects.create(
+                user=user,
+                full_name=fullname,
+                email=email,
+                phone_number=phoneNumber,
+                user_type='customer',
+                gender=gender,
+            )
+            user=authenticate(request, username=username, password=password)
+            login(request, user)
+            return redirect('home')
+        
+        else:
+            form=UserCreationForm()
+            context = {'form': form}
+    else:
+        form=UserCreationForm()
+        context = {'form': form}
+    return render(request,'base/signup.html', context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

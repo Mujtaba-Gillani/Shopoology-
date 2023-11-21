@@ -4,8 +4,32 @@ from io import BytesIO
 from PIL import Image
 from django.core.files import File
 from django.conf import settings
+from django.contrib.auth.models import User
 # Create your models here.
 
+class UserProfile(models.Model):
+    USER_TYPE_CHOICE=[
+        ('customer','Customer'),
+        ('seller','Seller'),
+    ]
+    GENDER_CHOICE=[
+        ('male','Male'),
+        ('female','Female'),
+        ('none', 'Prefer not to say'),
+    ]
+    
+    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name=models.CharField(max_length=200)
+    username=models.CharField(max_length=100)
+    email=models.EmailField(max_length=70)
+    phoneNumber=models.IntegerField()
+    user_type=models.CharField(max_length=20, choices=USER_TYPE_CHOICE)
+    gender=models.CharField(max_length=20, choices=GENDER_CHOICE)
+    date_of_birth=models.DateTimeField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.full_name or f"User Profile{self.pk}"
+    
 class Customer(models.Model):
     user=models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name=models.CharField(max_length=200, null=True)
