@@ -37,19 +37,23 @@ def cookieCart(request):
             pass
     return{'items':items, 'order':order,'cartItems':cartItems}
 
-
 def cartData(request):
     if request.user.is_authenticated:
-            customer=request.user.customer
-            order, created=Order.objects.get_or_create(customer=customer, complete=False)
-            items=order.orderitem_set.all()
-            cartItems=order.get_cart_items
+        try:
+            customer = request.user.user_profile
+        except UserProfile.DoesNotExist:
+            customer = None
+            # Handle the case when the user profile does not exist
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
     else:
-        cookieData=cookieCart(request)
-        cartItems=cookieData['cartItems']
-        order=cookieData['order']
-        items=cookieData['items']
-    return{'items':items, 'order':order,'cartItems':cartItems}
+        # Handle the case when the user is not authenticated
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
+    return {'items': items, 'order': order, 'cartItems': cartItems}
 
 
 

@@ -8,6 +8,7 @@ from .utils import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,10 +17,18 @@ from django.contrib.auth.decorators import login_required
 #home function
 def Home(request):
     if request.user.is_authenticated:
-        customer=get_object_or_404(Customer, user=request.user)
-        order, created= Order.objects.get_or_create(customer=customer, complete=False)
-        items=order.orderitem_set.all()
-        cartItems=order.get_cart_items
+        try:
+            user_profile = request.user.user_profile
+            customer = get_object_or_404(UserProfile, user=request.user)
+            order, created = Order.objects.get_or_create(user=customer.user, complete=False)
+
+            items = order.orderitem_set.all()
+            cartItems = order.get_cart_items
+        except UserProfile.DoesNotExist:
+            user_profile = None
+            items = []
+            order = {'get_cart_total': 0, 'get_cart_items': 0}
+            cartItems = order['get_cart_items']
         
     else:
         items=[]
@@ -150,38 +159,35 @@ def Login_view(request):
     return render(request,'base/login.html')
 
 def SignUp_view(request):
-    context={}
-    if request.method=='POST':
-        form= UserCreationForm(request.POST)
-        if form.is_valid():
-            fullname=request.POST.get('fullname')
-            username=request.POST.get('username')
-            email=request.POST.get('email')
-            phoneNumber=request.POST.get('PhoneNumber')
-            password = form.cleaned_data.get('password1')
-            gender=request.POST.get('gender')
+    context = {}
 
-            user=User.objects.create_user(username=username, email=email, password=password)
-            
-            user_profile=UserProfile.objects.create(
-                user=user,
-                full_name=fullname,
-                email=email,
-                phone_number=phoneNumber,
-                user_type='customer',
-                gender=gender,
-            )
-            user=authenticate(request, username=username, password=password)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+
+            user_profile = UserProfile.objects.create(user=user)
+            user_profile.full_name = form.cleaned_data['fullname']
+            user_profile.email = form.cleaned_data['email']
+            user_profile.phone_number = int(form.cleaned_data['phone_number'])
+            user_profile.user_type = form.cleaned_data['user_type']
+            user_profile.gender = form.cleaned_data['gender']
+            user_profile.date_of_birth = form.cleaned_data['date_of_birth']
+            user_profile.save()
+
+            user = authenticate(request, username=user.username, password=form.cleaned_data['password1'])
             login(request, user)
+
             return redirect('home')
-        
         else:
-            form=UserCreationForm()
             context = {'form': form}
     else:
-        form=UserCreationForm()
+        form = SignUpForm()
         context = {'form': form}
-    return render(request,'base/signup.html', context)
+
+    return render(request, 'base/signup.html', context)
 
 def logout_view(request):
     logout(request)
