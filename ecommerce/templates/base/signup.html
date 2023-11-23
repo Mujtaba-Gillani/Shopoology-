@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/registration.css' %}">
 
     <div class="body">
-      <div class="wrapper"><h2>Registration</h2>
+      <div class="wrapper-signup"><h2>Registration</h2>
       <div class="content">
         <form method="post" action="{% url 'signup' %}">
           {% csrf_token %}
@@ -48,20 +48,37 @@
             </div>
           </div>
           <div class="input-groupp">
-            <label for="user_type"><h5>User Type:</h5></label>
+            <label for="user_type"><h5 class="heading-h5">User Type:</h5></label>
             <div id="user_type" class="radio-group" required>
-              <input type="radio" id="buyer" name="user_type" value="buyer">
-              <label for="buyer">Buyer</label>
+              <input type="radio" id="buyer" name="user_type" value="buyer" class="radio-input">
+              <label for="buyer" class="label-size">Buyer</label >
               
-              <input type="radio" id="seller" name="user_type" value="seller">
-              <label for="seller">Seller</label>
+              <input type="radio" id="seller" name="user_type" value="seller" class="radio-input">
+              <label for="seller" class="label-size">Seller</label>
+
+              <input type="radio" id="admin" name="user_type" value="admin" class="radio-input">
+              <label for="seller" class="label-size">Admin</label>
+            </div>
+          </div>
+
+          <div class="input-groupp">
+            <label for="user_type"><h5 class="heading-h5">Gender:</h5></label>
+            <div id="user_type" class="radio-group" required>
+              <input type="radio" id="buyer" name="user_type" value="buyer" class="radio-input">
+              <label for="buyer" class="label-size">Male</label >
+              
+              <input type="radio" id="seller" name="user_type" value="seller" class="radio-input">
+              <label for="seller" class="label-size">Female</label>
+
+              <input type="radio" id="admin" name="user_type" value="admin" class="radio-input">
+              <label for="seller" class="label-size">None</label>
             </div>
           </div>
 
 
 
           
- <div class="gender-details">
+   {% comment %} <div class="gender-details">
     <span class="gender-title"><h5>Gender</h5></span>
   <div class="category">
     <label for="dot-1" class="label">
@@ -79,11 +96,11 @@
       <!-- <span class="dot three"></span> -->
       <span class="gender">None</span>
     </label>
-  </div>
+  </div>  {% endcomment %}
   
 </div>
 
-          <button type="submit">Regiter</button>
+          <button type="submit">Register</button>
 
         </form>
       </div>
