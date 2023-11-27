@@ -15,27 +15,48 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #home function
-def Home(request):
-    if request.user.is_authenticated:
-        try:
-            user_profile = request.user.user_profile
-            customer = get_object_or_404(UserProfile, user=request.user)
-            order, created = Order.objects.get_or_create(user=customer.user, complete=False)
+# def Home(request):
+#     if request.user.is_authenticated:
+#         try:
+#             user_profile = user.user_profile
+#             user = get_object_or_404(UserProfile, user=user_profile)
+#             order, created = Order.objects.get_or_create(user=user, complete=False)
 
+#             items = order.orderitem_set.all()
+#             cartItems = order.get_cart_items
+#         except UserProfile.DoesNotExist:
+#             user_profile = None
+#             items = []
+#             order = {'get_cart_total': 0, 'get_cart_items': 0}
+#             cartItems = order['get_cart_items']
+        
+#     else:
+#         items=[]
+#         order={'get_cart_total':0, 'get_cart_items':0}
+#         cartItems=order['get_cart_items']
+        
+#     context={'items':items, 'order':order, 'cartItems': cartItems}
+#     return render(request, 'base/home.html', context)
+
+
+def Home(request):
+    user = request.user
+    user_profile = None
+    items = []
+    order = {'get_cart_total': 0, 'get_cart_items': 0}
+    cartItems = order['get_cart_items']
+
+    if user.is_authenticated:
+        try:
+            user_profile = user.user_profile
+            order, created = Order.objects.get_or_create(user=user_profile, complete=False)
             items = order.orderitem_set.all()
             cartItems = order.get_cart_items
         except UserProfile.DoesNotExist:
-            user_profile = None
-            items = []
-            order = {'get_cart_total': 0, 'get_cart_items': 0}
-            cartItems = order['get_cart_items']
-        
-    else:
-        items=[]
-        order={'get_cart_total':0, 'get_cart_items':0}
-        cartItems=order['get_cart_items']
-        
-    context={'items':items, 'order':order, 'cartItems': cartItems}
+            # Handle the case when the user profile does not exist
+            pass
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'user_profile': user_profile}
     return render(request, 'base/home.html', context)
 
 #cart function
@@ -74,11 +95,10 @@ def updateItem(request):
     data= json.loads(request.body)
     productId= data['productId']
     action = data['action']
-    # print('Action: ', action)
-    # print('Product: ', productId)
-    customer=request.user.customer
+
+    customer=request.user.user_profile
     product= Product.objects.get(id=productId)
-    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    order, created = Order.objects.get_or_create(user=customer, complete=False)
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
     if action == 'add':
         orderItem.quantity = (orderItem.quantity +1)
@@ -117,8 +137,9 @@ def processOrder(request):
     data= json.loads(request.body)
     
     if request.user.is_authenticated:
-        customer=request.user.customer
-        order,created=Order.objects.get_or_create(customer=customer, complete=False)
+        customer=request.user.user_profile
+        # print("customerrrrrrrrrrr", customer)
+        order,created=Order.objects.get_or_create(user=customer, complete=False)
 
 
     else:
@@ -133,7 +154,7 @@ def processOrder(request):
     
     if order.shipping== True:
         Shipping_Address.objects.create(
-            customer=customer,
+            user=request.user.user_profile,
             order=order,
             address=data['shipping']['address'],
             city=data['shipping']['city'],
@@ -164,19 +185,26 @@ def SignUp_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password1'])
-            user.save()
+            # Create a new user
+            user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1'],
+                email=form.cleaned_data['email']
+            )
 
-            user_profile = UserProfile.objects.create(user=user)
-            user_profile.full_name = form.cleaned_data['fullname']
-            user_profile.email = form.cleaned_data['email']
-            user_profile.phone_number = int(form.cleaned_data['phone_number'])
-            user_profile.user_type = form.cleaned_data['user_type']
-            user_profile.gender = form.cleaned_data['gender']
-            user_profile.date_of_birth = form.cleaned_data['date_of_birth']
+            # Create a corresponding UserProfile
+            user_profile = UserProfile(
+                user=user,
+                full_name=form.cleaned_data['fullname'],
+                email=form.cleaned_data['email'],
+                phone_number=form.cleaned_data['phone_number'],
+                user_type=form.cleaned_data['user_type'],
+                gender=form.cleaned_data['gender'],
+                date_of_birth=form.cleaned_data['date_of_birth']
+            )
             user_profile.save()
 
+            # Authenticate and login the user
             user = authenticate(request, username=user.username, password=form.cleaned_data['password1'])
             login(request, user)
 

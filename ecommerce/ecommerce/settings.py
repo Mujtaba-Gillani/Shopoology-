@@ -68,6 +68,8 @@ TEMPLATES = [
     },
 ]
 
+# AUTH_USER_MODEL = 'base.UserProfile'
+
 WSGI_APPLICATION = "ecommerce.wsgi.application"
 
 

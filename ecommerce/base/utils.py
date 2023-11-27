@@ -43,8 +43,14 @@ def cartData(request):
             customer = request.user.user_profile
         except UserProfile.DoesNotExist:
             customer = None
-            # Handle the case when the user profile does not exist
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            
+        orders = Order.objects.filter(user=customer, complete=False)
+        if orders.exists():
+            order = orders.first()
+        else:
+            order = Order.objects.create(user=customer, complete=False)
+            
+        # order, created = Order.objects.get_or_create(user=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
@@ -67,7 +73,7 @@ def guestOrder(request, data):
     cookieData=cookieCart(request)
     items=cookieData['items']
     customer, created=UserProfile.objects.get_or_create(email=email,)
-    customer.name=name
+    customer.full_name=name
     customer.save()
     
     order=Order.objects.create(

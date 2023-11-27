@@ -4,99 +4,53 @@
 
 {% block content %}
 
-<!-- <style>
-    /* Add the provided CSS styling here */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      color: #4f868c;
-    }
-  
-    header {
-      background-color: #4f868c;
-      color: #fff;
-      padding: 10px;
-      margin: 10px;
-      text-align: center;
-    }
-  
-    .banner {
-      position: relative;
-      width: 100%;
-      height: 400px;
-      background-image: url('{% static "images/pxfuel.jpg" %}'); /* Update with your banner image path in the static folder */
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-    }
-  
-    .banner:hover {
-      opacity: 0.8;
-    }
-  
-    .slideshow {
-      display: flex;
-      overflow: hidden;
-    }
-  
-    .product-card {
-      width: 300px;
-      margin: 20px;
-      
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease-in-out;
-    }
-  
-    .product-card:hover {
-      transform: scale(1.05);
-    }
-  
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-  
-    .product-info {
-      padding: 10px;
-      text-align: center;
-    }
-  </style>
-<!-- Add the HTML structure here -->
-<!-- <header>
-    <h1>Shopology</h1>
-  </header>
-  
-  <div class="banner"></div>
-  
-  <div class="slideshow">
-    <div class="product-card">
-      <img src="{% static 'product1.jpg' %}" alt="Product 1">
-      <div class="product-info">
-        <h3>Product 1</h3>
-        <p>Description of Product 1.</p>
-        <p>Price: $19.99</p>
-        <p>Offer: 10% off</p>
+
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Shoppology</h1>
+    <p class="lead">Hope You Experience the Best Shopping Journey</p>
+    <hr class="my-4">
+    <p>Discover amazing products and enjoy great deals!</p>
+    <a class="btn btn-primary btn-lg" href="{%url 'store'%}" role="button">Shop Now</a>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="product-card">
+        <h2>Featured Products</h2>
+        <img src="../../static/images/Blank 4 Grids Funky Collage Template.png" alt="Featured Products">
+        <div class="product-description">
+          <p>
+            Discover our handpicked collection of featured products, carefully selected to bring you the latest trends and high-quality essentials. From stylish fashion to cutting-edge electronics, our featured products showcase the best of what Shoppology has to offer. Explore a world of innovation and style with these must-have items.
+          </p>
+        </div>
       </div>
     </div>
-  
-    <div class="product-card">
-      <img src="{% static 'product2.jpg' %}" alt="Product 2">
-      <div class="product-info">
-        <h3>Product 2</h3>
-        <p>Description of Product 2.</p>
-        <p>Price: $29.99</p>
-        <p>Offer: 15% off</p>
+    <div class="col-md-4">
+      <div class="product-card">
+        <h2>Latest Arrivals</h2>
+        <img src="../../static/images/Simple Collage Blank1.png" alt="Latest Arrivals">
+        <div class="product-description">
+          <p>
+            Dive into the latest arrivals at Shoppology! Our collection is constantly updated to bring you the freshest trends and newest products. From fashion styles to cutting gadgets, what's hot and stay ahead of the curve. Be the first to experience the excitement of our latest arrivals and elevate your shopping experience with Shoppology.
+          </p>
+        </div>
       </div>
     </div>
-  
-    <!-- Add more product cards as needed -->
-  
-  </div>  -->
-<h2> Welcome to Shoppology</h2>
-<hr>
-<h5>Hope You Experience the best</h5>
+    <div class="col-md-4">
+      <div class="product-card">
+        <h2>Special Offers</h2>
+        <img src="../../static/images/Simple Collage Blank.png" alt="Special Offers">
+        <div class="product-description">
+          <p>
+            Explore exclusive special offers at Shoppology! Our curated selection of products comes with incredible discounts, limited-time deals, and unique promotions. Don't miss out on the chance to save big and discover fantastic deals on a variety of items. Shop smart, shop Shoppology, and enjoy the thrill of special offers!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock content %}

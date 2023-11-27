@@ -6,7 +6,7 @@ from django.core.files import File
 from django.conf import settings
 from .user import *
 from.mixins import *
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -39,30 +39,14 @@ class UserProfile(AbstractUser):
     ]
     user = models.OneToOneField(User,related_name='user_profile', on_delete=models.CASCADE, null=True, blank=True)
     full_name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
     phone_number = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
     date_of_birth = models.DateTimeField(null=True, blank=True)
-    password = models.CharField(max_length=128, default='')
 
     objects = UserProfileManager()
 
-    def is_admin(self):
-        return self.type == UserTypeChoice.ADMIN.value
-
-    def is_customer(self):
-        return self.type == UserTypeChoice.CUSTOMER.value
-
-    def is_seller(self):
-        return self.type == UserTypeChoice.SELLER.value
-
-    def __str__(self):
-        return self.full_name or f"User Profile {self.pk}"
-    
-    # def __str__(self):
-    #     return self.user.username
-    
     groups = models.ManyToManyField(
         Group,
         verbose_name=('groups'),
@@ -73,7 +57,7 @@ class UserProfile(AbstractUser):
             'granted to each of their groups.'
         ),
     )
-
+    
     user_permissions = models.ManyToManyField(
         Permission,
         verbose_name=('user permissions'),
@@ -81,10 +65,30 @@ class UserProfile(AbstractUser):
         related_name='user_profiles_permissions',
         help_text=('Specific permissions for this user.'),
     )
+    
+    def is_admin(self):
+        return self.user_type == UserTypeChoice.ADMIN.value
+
+    def is_customer(self):
+        return self.user_type == UserTypeChoice.CUSTOMER.value
+
+    def is_seller(self):
+        return self.user_type == UserTypeChoice.SELLER.value
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.user.username
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return self.full_name or f"User Profile {self.pk}"
+    
+
+    
+
 
 class Product(models.Model):
     name=models.CharField(max_length=200)
-    price=models.DecimalField(decimal_places=2, max_digits=7)
+    price=models.DecimalField(decimal_places=2, max_digits=9)
     digital=models.BooleanField(default=False, null=True, blank=True)  # buy default every item is physical  
     image=models.ImageField(null=True, blank=True)
     
@@ -147,8 +151,8 @@ class Order(models.Model):
     @property
     def get_cart_items(self):
         orderitems=self.orderitem_set.all()
-        total=sum([item.quantity for item in orderitems])
-        return total
+        total_items=sum([item.quantity for item in orderitems])
+        return total_items
     
     
 class OrderItem(models.Model):

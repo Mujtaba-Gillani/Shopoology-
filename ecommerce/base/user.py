@@ -5,7 +5,7 @@ class UserTypeChoice(Enum):
     ADMIN = "AD"
     CUSTOMER = "CU"
     SELLER = "SE"
-     
+    
     @classmethod
     def choices(cls):
         return tuple((i.value, i.value) for i in cls)
