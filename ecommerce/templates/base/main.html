@@ -73,6 +73,13 @@
 	    <div class="form-inline my-2 my-lg-0">
 			{% if user.is_authenticated %}
 				<p class="navbar-text">Welcome, {{ user.username }}!</p>
+				<p class="navbar-text">Your user type is {{ request.user.user_profile.date_of_birth }}.</p>
+				<!-- {% if user.user_profile %}
+				<p class="navbar-text">Welcome, {{ user.username }}! Your user type is {{ user.user_profile.user_type }}.</p>
+				<a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
+				{% else %}
+				<p class="navbar-text">User profile not available.</p>
+				{% endif %} -->
 				<a href="{% url 'logout'%}"class="btn btn-warning">Logout</a>
 
 			{% else %}
