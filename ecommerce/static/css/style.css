@@ -1,5 +1,14 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
 body{
+	overflow-x: hidden;
 	background-color: hsl(0, 0%, 98%);
+}
+body::-webkit-scrollbar {
+	display: none;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -127,6 +136,7 @@ h1,h2,h3,h4,h5,h6{
     background-size: cover;
 	background-blend-mode:color-burn;
     background-position: center;
+	width: 99vw;
     color: #ffffff;
     padding: 50px; 
     position: relative;

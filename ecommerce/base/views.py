@@ -14,31 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-#home function
-# def Home(request):
-#     if request.user.is_authenticated:
-#         try:
-#             user_profile = user.user_profile
-#             user = get_object_or_404(UserProfile, user=user_profile)
-#             order, created = Order.objects.get_or_create(user=user, complete=False)
-
-#             items = order.orderitem_set.all()
-#             cartItems = order.get_cart_items
-#         except UserProfile.DoesNotExist:
-#             user_profile = None
-#             items = []
-#             order = {'get_cart_total': 0, 'get_cart_items': 0}
-#             cartItems = order['get_cart_items']
-        
-#     else:
-#         items=[]
-#         order={'get_cart_total':0, 'get_cart_items':0}
-#         cartItems=order['get_cart_items']
-        
-#     context={'items':items, 'order':order, 'cartItems': cartItems}
-#     return render(request, 'base/home.html', context)
-
-
+# home function 
 def Home(request):
     user = request.user
     user_profile = None
@@ -220,3 +196,4 @@ def SignUp_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+

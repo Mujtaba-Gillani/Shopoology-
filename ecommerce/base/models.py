@@ -38,7 +38,9 @@ class UserProfile(AbstractUser):
         ('none', 'Prefer not to say'),
     ]
     user = models.OneToOneField(User,related_name='user_profile', on_delete=models.CASCADE, null=True, blank=True)
+    print("userrr", user)
     full_name = models.CharField(max_length=200)
+    print("fullnameeee", full_name)
     email = models.EmailField(max_length=200, unique=True)
     phone_number = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
@@ -67,13 +69,13 @@ class UserProfile(AbstractUser):
     )
     
     def is_admin(self):
-        return self.user_type == UserTypeChoice.ADMIN.value
+        return self.user_type == UserTypeChoice.admin_user()
 
     def is_customer(self):
-        return self.user_type == UserTypeChoice.CUSTOMER.value
+        return self.user_type == UserTypeChoice.customer_user()
 
     def is_seller(self):
-        return self.user_type == UserTypeChoice.SELLER.value
+        return self.user_type == UserTypeChoice.seller_user()
 
     def save(self, *args, **kwargs):
         if not self.username:
