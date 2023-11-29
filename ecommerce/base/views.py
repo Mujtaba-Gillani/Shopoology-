@@ -151,7 +151,10 @@ def Login_view(request):
         
         if user is not  None:
             login(request, user)
-            return redirect('home')
+            if user.user_profile.user_type==UserTypeChoice.seller_user():
+                return redirect('seller:dashboard')
+            else:
+                return redirect('home')
         
     return render(request,'base/login.html')
 

@@ -38,9 +38,7 @@ class UserProfile(AbstractUser):
         ('none', 'Prefer not to say'),
     ]
     user = models.OneToOneField(User,related_name='user_profile', on_delete=models.CASCADE, null=True, blank=True)
-    print("userrr", user)
     full_name = models.CharField(max_length=200)
-    print("fullnameeee", full_name)
     email = models.EmailField(max_length=200, unique=True)
     phone_number = models.IntegerField(null=True, blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
