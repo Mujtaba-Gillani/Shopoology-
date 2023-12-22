@@ -87,10 +87,19 @@ class UserProfile(AbstractUser):
 
 
 class Product(models.Model):
+    CATEGORY_CHOICES = [
+        ('Cakes', 'Cakes'),
+        ('Cupcakes', 'Cupcakes'),
+        ('Bouquets', 'Bouquets'),
+        ('Donuts', 'Donuts'),
+        ('Brownies', 'Brownies'),
+    ]
     name=models.CharField(max_length=200)
     price=models.DecimalField(decimal_places=2, max_digits=9)
     digital=models.BooleanField(default=False, null=True, blank=True)  # buy default every item is physical  
     image=models.ImageField(null=True, blank=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='Cakes')  # Add this line
+
     
     def __str__(self):
         return self.name
@@ -104,26 +113,7 @@ class Product(models.Model):
         except:
             url= ''
         return url
-    # @classmethod
-    # def create_with_defaults(cls, name, price, digital=False, uploaded_image=None):
-    #     # Create a new Product instance with default values
-    #     product = cls(name=name, price=price, digital=digital)
 
-    #     # Check if an image was uploaded
-    #     if uploaded_image:
-    #         product.image = uploaded_image
-    #     else:
-    #         # No image uploaded, set a default image
-    #         default_image_path = settings.BASE_DIR / "static/images/placeholder.png"  # Construct the correct path
-    #         default_image = Image.open(default_image_path)
-    #         buffer = BytesIO()
-    #         default_image.save(buffer, 'PNG')
-    #         product.image.save('palceholder.png', File(buffer), save=False)
-
-    #     product.save()  # Save the product instance
-
-    #     return product
-    
     
 class Order(models.Model):
     user=models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)

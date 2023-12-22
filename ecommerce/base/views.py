@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
+from django.urls import resolve
+
 
 
 # Create your views here.
@@ -37,13 +39,36 @@ def Home(request):
 
 #cart function
 def Cart(request):
-    data=cartData(request)
-    items=data['items']
-    order=data['order']
-    cartItems=data['cartItems']
-    context={'items':items, 'order':order,'cartItems':cartItems}
-    return render(request, 'base/cart.html', context)
+    data = cartData(request)
+    items = data['items']
+    order = data['order']
+    cartItems = data['cartItems']
 
+    # Get the current view's URL
+    current_url = request.resolver_match.url_name
+
+    # Create a dictionary mapping category names to their respective URLs
+    category_urls = {
+        'cakes': 'cakes',
+        'cupcakes': 'cupcakes',
+        # Add other categories...
+    }
+
+    # Get the category parameter from the current URL
+    category = request.GET.get('category', None)
+
+    # If the category is valid, update the current_url to the category's URL
+    if category and category in category_urls:
+        current_url = category_urls[category]
+
+    context = {
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'current_url': current_url,
+    }
+
+    return render(request, 'base/cart.html', context)
 #store function
 def Store(request):
     data=cartData(request)
@@ -55,17 +80,122 @@ def Store(request):
     context={'products':product, 'cartItems':cartItems}
     return render(request, 'base/store.html', context)
 
-#checkout function
 
-def Checkout(request):
 
+#cupcake function
+def Cupcake(request):
     data=cartData(request)
     cartItems=data['cartItems']
-    items=data['items']
-    order=data['order']
-    context={'items':items, 'order':order, 'cartItems':cartItems}
-    return render(request, 'base/checkout.html', context)
+    
+    
+    cupcakes = Product.objects.filter(category='Cupcakes')
+    
+    context={'products':cupcakes, 'cartItems':cartItems}
+    return render(request, 'base/cupcakes.html', context)
 
+#donut function
+def Donut(request):
+    data=cartData(request)
+    cartItems=data['cartItems']
+    
+    
+    donut = Product.objects.filter(category='Donuts')
+    
+    context={'products':donut, 'cartItems':cartItems}
+    return render(request, 'base/donut.html', context)
+
+#bouquet function
+def Bouquet(request):
+    data=cartData(request)
+    cartItems=data['cartItems']
+    
+    
+    bouquet = Product.objects.filter(category='Bouquets')
+    
+    context={'products':bouquet, 'cartItems':cartItems}
+    return render(request, 'base/bouquet.html', context)
+
+
+#brownie function
+def Brownie(request):
+    data=cartData(request)
+    cartItems=data['cartItems']
+    
+    
+    brownie = Product.objects.filter(category='Brownies')
+    
+    context={'products':brownie, 'cartItems':cartItems}
+    return render(request, 'base/brownie.html', context)
+
+
+#donut function
+def Donut(request):
+    data=cartData(request)
+    cartItems=data['cartItems']
+    
+    
+    donut = Product.objects.filter(category='Donuts')
+    
+    context={'products':donut, 'cartItems':cartItems}
+    return render(request, 'base/donut.html', context)
+
+    
+
+#cakes function
+def Cakes(request):
+    data=cartData(request)
+    cartItems=data['cartItems']
+    
+    
+    cakes = Product.objects.filter(category='Cakes')
+
+    context={'products':cakes, 'cartItems':cartItems}
+    return render(request, 'base/cakes.html', context)
+
+
+#checkout function
+
+# def Checkout(request):
+
+#     data=cartData(request)
+#     cartItems=data['cartItems']
+#     items=data['items']
+#     order=data['order']
+#     context={'items':items, 'order':order, 'cartItems':cartItems}
+#     return render(request, 'base/checkout.html', context)
+
+
+def Checkout(request):
+    data = cartData(request)
+    items = data['items']
+    order = data['order']
+    cartItems = data['cartItems']
+
+    # Get the current view's URL
+    current_url = request.resolver_match.url_name
+
+    # Create a dictionary mapping category names to their respective URLs
+    category_urls = {
+        'cakes': 'cakes',
+        'cupcakes': 'cupcakes',
+        # Add other categories...
+    }
+
+    # Get the category parameter from the current URL
+    category = request.GET.get('category', None)
+
+    # If the category is valid, update the current_url to the category's URL
+    if category and category in category_urls:
+        current_url = category_urls[category]
+
+    context = {
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'current_url': current_url,
+    }
+
+    return render(request, 'base/checkout.html', context)
 
 def updateItem(request):
     data= json.loads(request.body)
