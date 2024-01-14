@@ -4,16 +4,16 @@
 {% block content %}
 
     <!-- Page Header Start -->
-    <div class="container-fluid bg-dark bg-img mb-5">
+    {% comment %} <div class="container-fluid bg-dark bg-img p-5 mb-5">
         <div class="row">
             <div class="col-12 text-center">
                 <h1 class="display-4 text-uppercase text-white">Home </h1>
                 <a href="{% url 'home' %}">Home</a>
-                {% comment %} <i class="far fa-square text-primary px-2"></i>
-                <a href="{% url 'menu' %}">Menu and pricing</a> {% endcomment %}
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="{% url 'home' %}">Home</a>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
     <!-- Page Header End -->
 
 
@@ -23,9 +23,10 @@
         <div class="container py-5">
             <div class="row justify-content-start">
                 <div class="col-lg-8 text-center text-lg-start">
-                    <h1 class="font-secondary text-primary mb-4">Super Crispy</h1>
-                    <h1 class="display-1 text-uppercase text-white mb-4">CakeZone</h1>
-                    <h1 class="text-uppercase text-white">The Best Cake In London</h1>
+
+                    <h1 class="font-secondary text-primary mb-4">Super soft and moisty</h1>
+                    <h1 class="display-1 text-uppercase text-white mb-4">CakesByRimi</h1>
+                    <h1 class="text-uppercase text-white">The Best Cake In Town</h1>
                     <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
                         <a href="" class="btn btn-primary border-inner py-3 px-5 me-5">Read More</a>
                         <button type="button" class="btn-play" data-bs-toggle="modal"
@@ -72,7 +73,7 @@
             <div class="row gx-5">
                 <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/about.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="../../static/images/frontend/img/about.jpg" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 pb-5">
@@ -180,7 +181,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -192,7 +193,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -204,7 +205,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -216,7 +217,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -228,7 +229,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -240,7 +241,7 @@
                             <div class="col-lg-6">
                                 <div class="d-flex h-100">
                                     <div class="flex-shrink-0">
-                                        <img class="img-fluid" src="img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
+                                        <img class="img-fluid" src="../../../images/frontend/img/cake-1.jpg" alt="" style="width: 150px; height: 85px;">
                                         <h4 class="bg-dark text-primary p-2 m-0">$99.00</h4>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
@@ -456,7 +457,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
+                            <img class="img-fluid w-100" src="../../../images/frontend/img/team-1.jpg" alt="">
                             <div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
@@ -474,7 +475,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
+                            <img class="img-fluid w-100" src="../../../images/frontend/img/team-2.jpg" alt="">
                             <div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
@@ -492,7 +493,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="team-item">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
+                            <img class="img-fluid w-100" src="../../../images/frontend/img/team-3.jpg"  alt="">
                             <div class="team-overlay w-100 h-100 position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 mx-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
@@ -533,16 +534,21 @@
 
 
     <!-- Testimonial Start -->
+
     <div class="container-fluid py-5">
         <div class="container">
             <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
                 <h2 class="text-primary font-secondary">Testimonial</h2>
                 <h1 class="display-4 text-uppercase">Our Clients Say!!!</h1>
             </div>
-            <div class="owl-carousel testimonial-carousel">
-                <div class="testimonial-item bg-dark text-white border-inner p-4">
+            <div class="owl-carousel testimonial-carousel owl-loaded owl-drag">
+                
+                
+                
+                
+            <div class="owl-stage-outer"><div class="owl-stage" style="transition: all 0s ease 0s; width: 2964px; transform: translate3d(-926px, 0px, 0px);"><div class="owl-item cloned" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid flex-shrink-0" src="img/testimonial-1.jpg" style="width: 60px; height: 60px;">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-1.jpg" style="width: 60px; height: 60px;">
                         <div class="ps-3">
                             <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
                             <span>Profession</span>
@@ -550,10 +556,9 @@
                     </div>
                     <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
                     </p>
-                </div>
-                <div class="testimonial-item bg-dark text-white border-inner p-4">
+                </div></div><div class="owl-item cloned" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid flex-shrink-0" src="img/testimonial-2.jpg" style="width: 60px; height: 60px;">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-2.jpg"style="width: 60px; height: 60px;">
                         <div class="ps-3">
                             <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
                             <span>Profession</span>
@@ -561,10 +566,9 @@
                     </div>
                     <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
                     </p>
-                </div>
-                <div class="testimonial-item bg-dark text-white border-inner p-4">
+                </div></div><div class="owl-item" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid flex-shrink-0" src="img/testimonial-3.jpg" style="width: 60px; height: 60px;">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-3.jpg" style="width: 60px; height: 60px;">
                         <div class="ps-3">
                             <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
                             <span>Profession</span>
@@ -572,10 +576,9 @@
                     </div>
                     <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
                     </p>
-                </div>
-                <div class="testimonial-item bg-dark text-white border-inner p-4">
+                </div></div><div class="owl-item active center" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid flex-shrink-0" src="img/testimonial-4.jpg" style="width: 60px; height: 60px;">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-4.jpg" style="width: 60px; height: 60px;">
                         <div class="ps-3">
                             <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
                             <span>Profession</span>
@@ -583,8 +586,47 @@
                     </div>
                     <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
                     </p>
-                </div>
-            </div>
+                </div></div><div class="owl-item active" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-1.jpg" style="width: 60px; height: 60px;">
+                        <div class="ps-3">
+                            <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
+                            <span>Profession</span>
+                        </div>
+                    </div>
+                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                </div></div><div class="owl-item" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-2.jpg" style="width: 60px; height: 60px;">
+                        <div class="ps-3">
+                            <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
+                            <span>Profession</span>
+                        </div>
+                    </div>
+                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                </div></div><div class="owl-item cloned" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-3.jpg" style="width: 60px; height: 60px;">
+                        <div class="ps-3">
+                            <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
+                            <span>Profession</span>
+                        </div>
+                    </div>
+                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                </div></div><div class="owl-item cloned" style="width: 325.5px; margin-right: 45px;"><div class="testimonial-item bg-dark text-white border-inner p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid flex-shrink-0" src="../../../images/frontend/img/testimonial-4.jpg" style="width: 60px; height: 60px;">
+                        <div class="ps-3">
+                            <h4 class="text-primary text-uppercase mb-1">Client Name</h4>
+                            <span>Profession</span>
+                        </div>
+                    </div>
+                    <p class="mb-0">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam
+                    </p>
+                </div></div></div></div><div class="owl-nav disabled"><div class="owl-prev">prev</div><div class="owl-next">next</div></div><div class="owl-dots"><div class="owl-dot"><span></span></div><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div>
         </div>
     </div>
     <!-- Testimonial End -->
