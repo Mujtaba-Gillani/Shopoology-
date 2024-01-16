@@ -24,3 +24,8 @@ def testimonial(request):
 
 def contactUs(request):
     return render(request, 'frontend/contact.html')
+
+
+
+def registraion(request):
+    return render(request, 'frontend/sign.html')
