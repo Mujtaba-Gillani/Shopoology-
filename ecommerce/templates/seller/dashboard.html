@@ -1,4 +1,13 @@
 {% extends 'base/main.html' %} {%load static%} {% block title %}Dashboard{% endblock %} {% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    
 
 <!-- <h1>this is dashboard page</h1> -->
 <div class="sidenav">
@@ -9,7 +18,7 @@
 </div>
 
 <!-- Content Area -->
-<div class="content" style="background-color: rgb(205, 205, 236);">
+<div class="content" >
     <h2>Sales</h2>
 
     <!-- Monthly and Yearly Sales -->
@@ -19,11 +28,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Monthly Sales</h5>
                     <!-- Add your monthly sales content here -->
-                    <div style="width:100%; margin:15px auto;">
-                        <canvas id="myChart"></canvas>
+                    <div class="chart-container"  style="height: 300px; background-color: lightgray;" >
+                        <canvas id="monthlySalesChart" ></canvas>
                     </div>
-                    <h1>Monthly Sales Graph here</h1>
-
                 </div>
             </div>
         </div>
@@ -176,27 +183,50 @@
     </div>
 
 </div>
-
-{% endblock %} {% block extrablock %}
+</body>
+{% endblock %}
+{% block extrablock %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    console.log("JavaScript is running!");
-
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["M", "T", "W", "T", "F", "S", "S"],
+    document.addEventListener('DOMContentLoaded', function () {
+        // JavaScript code for creating a bar chart
+        var data = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
             datasets: [{
-                label: 'apples',
-                data: [12, 19, 3, 17, 28, 24,
-                    7
-                ],
-                backgroundColor: "rgba(153,255,51,1)"
-            }, {
-                label: 'oranges',
-                data: [30, 29, 5, 5, 20, 3, 10],
-                backgroundColor: "rgba(255,153,0,1)"
+                label: "Dataset #1",
+                backgroundColor: "rgba(255,99,132,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 2,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)",
+                data: [65, 59, 20, 81, 56, 55, 40],
             }]
-        }
+        };
+
+        var option = {
+            scales: {
+                yAxes: [{
+                    stacked: true,
+                    gridLines: {
+                        display: true,
+                        color: "rgba(255,99,132,0.2)"
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    }
+                }]
+            }
+        };
+
+        // Initialize the bar chart
+        var ctxMonthlySales = document.getElementById('monthlySalesChart').getContext('2d');
+        var monthlySalesChart = new Chart(ctxMonthlySales, {
+            type: 'bar',
+            options: option,
+            data: data
+        });
     });
-</script> {% endblock %}
+</script>
+{% endblock %}
