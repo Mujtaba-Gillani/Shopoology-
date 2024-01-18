@@ -29,3 +29,7 @@ def contactUs(request):
 
 def registraion(request):
     return render(request, 'frontend/sign.html')
+
+
+def AddToCart(request):
+    return render(request, 'frontend/cart.html')

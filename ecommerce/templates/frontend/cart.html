@@ -1,0 +1,124 @@
+{% extends 'frontend/main.html' %} 
+{% load static %} 
+{% block title %}Cart{% endblock %} 
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="breadcrum">
+            <p>home/product/id123</p>
+        </div>
+        <div class="col-lg-6" >
+            <div class="cart-img"  >
+
+                <img style="height: 95vh; width: 40vw;" src="../../static/images/cake1.jpg" alt="">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="information-top">
+                <div class="top-left">
+                  <h1 itemprop="name" class="title">MTBC09</h1>    
+                  
+                  <div class="product-price">
+                    <meta itemprop="priceCurrency" content="PKR">
+                    <meta itemprop="price" content="4,000.00">  
+                    <h2 class="price" id="price-preview"><span class="money">Rs.4,000.00</span></h2>
+                  </div>
+                </div>
+                
+                <div class="top-right">
+                  <div class="rating-content">
+                    <div class="rating-description">
+                      <span class="shopify-product-reviews-badge" data-id="1471374753858"></span>
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+            <div class="description" >                      
+                Summer of love with light peach base and contrasting floral design on the top.
+            </div>  
+            <div class="size">
+                <ul>
+                    <h3>Sizes</h3>
+                    <li>2lb</li>
+                    <li>3lb</li>
+                    <li>4lb</li>
+                </ul>
+            </div>
+            <div class="delivery-time">
+                <label for="delivery-time">Select Delivery Time:</label>
+                <select id="delivery-time" name="delivery-time">
+                    <option value="12:00 AM">12:00 AM</option>
+                    <option value="1:00 AM">1:00 AM</option>
+                    <option value="2:00 AM">2:00 AM</option>
+                    <option value="3:00 AM">3:00 AM</option>
+                    <option value="4:00 AM">4:00 AM</option>
+                    <option value="5:00 AM">5:00 AM</option>
+                    <option value="6:00 AM">6:00 AM</option>
+                    <option value="7:00 AM">7:00 AM</option>
+                    <option value="8:00 AM">8:00 AM</option>
+                    <option value="9:00 AM">9:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="1:00 PM">1:00 PM</option>
+                    <option value="2:00 PM">2:00 PM</option>
+                    <option value="3:00 PM">3:00 PM</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                    <option value="5:00 PM">5:00 PM</option>
+                    <option value="6:00 PM">6:00 PM</option>
+                    <option value="7:00 PM">7:00 PM</option>
+                    <option value="8:00 PM">8:00 PM</option>
+                    <option value="9:00 PM">9:00 PM</option>
+                    <option value="10:00 PM">10:00 PM</option>
+                    <!-- Add more options for each hour -->
+                    <option value="11:00 PM">11:00 PM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                </select>
+            </div>
+            <div class="date">
+                <label for="delivery-date">Select Date:</label><br>
+                <input type="date" id="delivery-date" name="delivery-date" required>
+            <br>
+                <label for="delivery-day">Select Day:</label> <br>
+                <select id="delivery-day" name="delivery-day" required>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+            </div>
+            <div class="text-on-cake">
+                <h4>Text on cake </h4>
+                <label for="cake-message">Write text here:</label> <br>
+                <input type="text" id="cake-message" name="cake-message" placeholder="Type your message here" maxlength="50">
+            </div>
+            <div class="flavors">
+                <h4>Choose Flavor:</h4>
+                <label for="flavor-select">Select Flavor:</label>
+                <select id="flavor-select" name="flavor-select" required>
+                    <option value="vanilla">Vanilla</option>
+                    <option value="chocolate">Chocolate</option>
+                    <option value="strawberry">Strawberry</option>
+                    <option value="red-velvet">Red Velvet</option>
+                    <!-- Add more options for each flavor -->
+                </select>
+            </div>
+            <div class="action-buttons">
+                <!-- Add to Cart button with Font Awesome icon -->
+                <button type="button" id="add-to-cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            
+                <!-- Heart icon for Add to Favorites with Font Awesome icon -->
+                <button type="button" id="add-to-favorites">
+                    <i class="fas fa-heart"></i> Add to Favorites
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

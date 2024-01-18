@@ -10,5 +10,6 @@ urlpatterns = [
     path('testimonial/', views.testimonial, name='testimonial'),
     path('contactus/', views.contactUs, name='contactus'),
     path('registration/', views.registraion, name='register'),
+    path('cart/', views.AddToCart, name='cart'),
 
 ]
