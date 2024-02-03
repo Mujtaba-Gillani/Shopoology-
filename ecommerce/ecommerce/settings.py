@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'seller.apps.SellerConfig',
     'frontend.apps.FrontendConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
