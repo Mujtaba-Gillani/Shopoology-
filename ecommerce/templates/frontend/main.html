@@ -27,6 +27,7 @@
 
     <!-- Template Stylesheet -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/frontend/css/festyle.css' %}">
+
 </head>
 
 <body>
@@ -97,6 +98,8 @@
         
     </div>
      -->
+     {% block extra_styles %}{% endblock %}
+
     {% block content %} {% endblock content %}
     <!-- Footer Start -->
     <div class="container-fluid bg-dark bg-img text-secondary" style="margin-top: 135px">
@@ -107,8 +110,7 @@
                         <a href="{% url 'home' %}" class="navbar-brand">
                             <h1 class="m-0 text-uppercase text-white"><i class="fa fa-birthday-cake fs-1 text-dark me-3"></i>Cakes By Rimi</h1>
                         </a>
-                        <p class="mt-3">Lorem diam sit erat dolor elitr et, diam lorem justo labore amet clita labore stet eos magna sit. Elitr dolor eirmod duo tempor lorem, elitr clita ipsum sea. Nonumy rebum et takimata ea takimata amet gubergren, erat rebum magna
-                            lorem stet eos. Diam amet et kasd eos duo dolore no.</p>
+                        <p class="mt-3">Indulge in the art of sweetness with Cakes by Rimi. Elevate your celebrations with our meticulously crafted cakes, where every bite is a journey of flavors and memories. Thank you for making us a part of your special moments. – Cakes by Rimi</p>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-6">
@@ -149,8 +151,8 @@
                             <p>Amet justo diam dolor rebum lorem sit stet sea justo kasd</p>
                             <form action="">
                                 <div class="input-group">
-                                    <input type="text" class="form-control border-white p-3" placeholder="Your Email">
-                                    <button class="btn btn-primary">Sign Up</button>
+                                    <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+
                                 </div>
                             </form>
                         </div>
