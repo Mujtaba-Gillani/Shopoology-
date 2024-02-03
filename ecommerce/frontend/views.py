@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Cake
 # Create your views here.
 
 def home(request):
@@ -11,7 +11,16 @@ def about_us(request):
 
 
 def menu(request):
-    return render(request, 'frontend/menu.html')
+    birthday_cakes = Cake.objects.filter(type='Birthday', active=True)
+    wedding_cakes = Cake.objects.filter(type='Wedding', active=True)
+    custom_cakes = Cake.objects.filter(type='Custom', active=True)
+    context = {
+        'birthday_cakes': birthday_cakes,
+        'wedding_cakes': wedding_cakes,
+        'custom_cakes': custom_cakes,
+    }
+    return render(request, 'frontend/menu.html', context)
+
 
 def team(request):
     return render(request, 'frontend/team.html')
