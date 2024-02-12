@@ -1,7 +1,17 @@
 /********** Template CSS **********/
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
 :root {
-    --primary: #E88F2A;
+    --primary: #c38edb;
     --secondary: #FAF3EB;
     --light: #FFFFFF;
     --dark: #2B2825;
@@ -312,4 +322,53 @@ h6,
 .bg-img {
     background: linear-gradient(rgba(43, 40, 37, .5), rgba(43, 40, 37, .5)), url(../../../images/frontend/img/bg.jpg) center center no-repeat;
     background-size: cover;
+}
+
+
+/* menu and pricing  */
+
+.tab-content .card {
+    padding: 8px;
+    cursor: pointer;
+    border: 2px solid #f3f3f3;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.tab-content .product-image {
+    width: 100%;
+    margin: auto;
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.tab-content .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+.tab-content a {
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+    background-color: #c38edb;
+}
+
+.tab-content a:hover {
+    border: none;
+}
+
+.tab-content .card:hover {
+    border: 2px solid #c38edb;
 }
