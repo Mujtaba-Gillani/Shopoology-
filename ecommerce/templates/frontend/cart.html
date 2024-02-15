@@ -1,50 +1,80 @@
-{% extends 'frontend/main.html' %} 
-{% load static %} 
-{% block title %}Cart{% endblock %} 
-{% block content %}
-<div class="container">
-    <div class="row">
+{% extends 'frontend/main.html' %} {% load static %} {% block title %}Cart{% endblock %} {% block content %}
+<div class="container" style="background-color:#c38edb11; border-radius:10px;">
+    <div class="row cart-main-content">
         <div class="breadcrum">
             <p>home/product/id123</p>
         </div>
-        <div class="col-lg-6" >
-            <div class="cart-img"  >
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="cart-img">
 
-                <img style="height: 95vh; width: 40vw;" src="../../static/images/cake1.jpg" alt="">
+                <img src="../../static/images/cake1.jpg" alt="">
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="information-top">
                 <div class="top-left">
-                  <h1 itemprop="name" class="title">MTBC09</h1>    
-                  
-                  <div class="product-price">
-                    <meta itemprop="priceCurrency" content="PKR">
-                    <meta itemprop="price" content="4,000.00">  
-                    <h2 class="price" id="price-preview"><span class="money">Rs.4,000.00</span></h2>
-                  </div>
-                </div>
-                
-                <div class="top-right">
-                  <div class="rating-content">
-                    <div class="rating-description">
-                      <span class="shopify-product-reviews-badge" data-id="1471374753858"></span>
+                    <h1 itemprop="name" class="title">MTBC09</h1>
+
+                    <div class="product-price">
+                        <meta itemprop="priceCurrency" content="PKR">
+                        <meta itemprop="price" content="4,000.00">
+                        <h2 class="price" id="price-preview"><span class="money">Rs.4,000.00</span></h2>
                     </div>
-                  </div>
                 </div>
-                
+
+                <div class="top-right">
+                    <div class="rating-content">
+                        <div class="rating-description">
+                            <span class="shopify-product-reviews-badge" data-id="1471374753858"></span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="description" >                      
+            <div class="description">
                 Summer of love with light peach base and contrasting floral design on the top.
-            </div>  
-            <div class="size">
-                <ul>
-                    <h3>Sizes</h3>
-                    <li>2lb</li>
-                    <li>3lb</li>
-                    <li>4lb</li>
-                </ul>
             </div>
+            <div class="size">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Sizes</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <input type="checkbox" id="size-2lb">
+                                        <label for="size-2lb">2lb</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input type="checkbox" id="size-3lb">
+                                        <label for="size-3lb">3lb</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input type="checkbox" id="size-4lb">
+                                        <label for="size-4lb">4lb</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <input type="checkbox" id="size-6lb">
+                                        <label for="size-6lb">6lb</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input type="checkbox" id="size-8lb">
+                                        <label for="size-8lb">8lb</label>
+                                    </li>
+                                    <li class="list-group-item" id="custom-cake-size">
+                                        <input type="text" id="custom-size" placeholder="Custom Size">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="delivery-time">
                 <label for="delivery-time">Select Delivery Time:</label>
                 <select id="delivery-time" name="delivery-time">
@@ -79,7 +109,7 @@
             <div class="date">
                 <label for="delivery-date">Select Date:</label><br>
                 <input type="date" id="delivery-date" name="delivery-date" required>
-            <br>
+                <br>
                 <label for="delivery-day">Select Day:</label> <br>
                 <select id="delivery-day" name="delivery-day" required>
                     <option value="Sunday">Sunday</option>
@@ -112,7 +142,7 @@
                 <button type="button" id="add-to-cart-btn">
                     <i class="fas fa-shopping-cart"></i> Add to Cart
                 </button>
-            
+
                 <!-- Heart icon for Add to Favorites with Font Awesome icon -->
                 <button type="button" id="add-to-favorites">
                     <i class="fas fa-heart"></i> Add to Favorites

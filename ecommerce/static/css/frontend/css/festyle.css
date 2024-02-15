@@ -372,3 +372,47 @@ h6,
 .tab-content .card:hover {
     border: 2px solid #c38edb;
 }
+
+
+/* cart styling section  */
+
+.cart-main-content {
+    margin: 10% 0;
+}
+
+.cart-img {
+    z-index: -1;
+}
+
+.cart-img img {
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    height: 5%;
+    width: 100%;
+}
+
+.size li {
+    border: none;
+}
+
+#custom-cake-size input {
+    border: 3px solid #c38edb45;
+    padding: 10px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+
+#custom-cake-size input:focus {
+    outline: none;
+}
+
+#custom-cake-size input:hover {
+    outline: none;
+    border: 3px solid #c38edb79;
+}
