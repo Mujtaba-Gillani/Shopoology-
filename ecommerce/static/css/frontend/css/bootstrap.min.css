@@ -2854,14 +2854,14 @@ fieldset:disabled .btn {
 
 .btn-primary {
     color: #000;
-    background-color: #E88F2A;
-    border-color: #E88F2A
+    background-color: #c38edb !important;
+    border-color: #765785 !important
 }
 
 .btn-primary:hover {
     color: #000;
-    background-color: #eba04a;
-    border-color: #ea9a3f
+    background-color: #b467d8 !important;
+    border-color: #8d5ea2 !important
 }
 
 .btn-check:focus+.btn-primary,
@@ -4128,7 +4128,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #E88F2A
+    background-color: #c38edb !important
 }
 
 .nav-fill>.nav-link,
@@ -7979,7 +7979,7 @@ fieldset:disabled .btn {
 }
 
 .bg-primary {
-    background-color: #E88F2A !important
+    background-color: #c38edb !important
 }
 
 .bg-secondary {
