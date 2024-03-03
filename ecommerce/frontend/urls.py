@@ -10,6 +10,8 @@ urlpatterns = [
     path('testimonial/', views.testimonial, name='testimonial'),
     path('contactus/', views.contactUs, name='contactus'),
     path('registration/', views.registraion, name='register'),
-    path('cart/', views.AddToCart, name='cart'),
+    path('cart/', views.AddToCartView.as_view(), name='cart'),
+    path('checkout/',views.CheckoutView.as_view(), name='checkout'),
+
 
 ]

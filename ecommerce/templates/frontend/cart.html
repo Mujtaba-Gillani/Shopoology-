@@ -13,14 +13,15 @@
         <div class="col-lg-8 col-md-8 col-sm-12">
             <div class="information-top">
                 <div class="top-left">
-                    <h1 itemprop="name" class="title">MTBC09</h1>
+                    <h1 itemprop="name" class="title">{{ cake_name }}</h1>
 
                     <div class="product-price">
                         <meta itemprop="priceCurrency" content="PKR">
-                        <meta itemprop="price" content="4,000.00">
-                        <h2 class="price" id="price-preview"><span class="money">Rs.4,000.00</span></h2>
+                        <meta itemprop="price" content="{{ cake_price }}">
+                        <h2 class="price" id="price-preview"><span class="money">Rs.{{ cake_price }}</span></h2>
                     </div>
                 </div>
+
 
                 <div class="top-right">
                     <div class="rating-content">
@@ -37,21 +38,21 @@
             <div class="size">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Sizes</h3>
+                        <h3 class="card-title">Weight in Pounds</h3>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <input type="checkbox" id="size-2lb">
-                                        <label for="size-2lb">2lb</label>
+                                        <label for="size-2lb">2</label>
                                     </li>
                                     <li class="list-group-item">
                                         <input type="checkbox" id="size-3lb">
-                                        <label for="size-3lb">3lb</label>
+                                        <label for="size-3lb">3</label>
                                     </li>
                                     <li class="list-group-item">
                                         <input type="checkbox" id="size-4lb">
-                                        <label for="size-4lb">4lb</label>
+                                        <label for="size-4lb">4</label>
                                     </li>
                                 </ul>
                             </div>
@@ -59,11 +60,11 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <input type="checkbox" id="size-6lb">
-                                        <label for="size-6lb">6lb</label>
+                                        <label for="size-6lb">6</label>
                                     </li>
                                     <li class="list-group-item">
                                         <input type="checkbox" id="size-8lb">
-                                        <label for="size-8lb">8lb</label>
+                                        <label for="size-8lb">8</label>
                                     </li>
                                     <li class="list-group-item" id="custom-cake-size">
                                         <input type="text" id="custom-size" placeholder="Custom Size">
@@ -139,9 +140,16 @@
             </div>
             <div class="action-buttons">
                 <!-- Add to Cart button with Font Awesome icon -->
-                <button type="button" id="add-to-cart-btn">
+                <!-- <a href="{% url 'checkout' %}?cake_name={{ cake_name }}&cake_price={{ cake_price }}&cake_size={{ selected_size }}" class="btn btn-primary">
                     <i class="fas fa-shopping-cart"></i> Add to Cart
-                </button>
+                </a> -->
+
+                <a href="#" id="add-to-cart-btn" class="btn btn-primary">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </a>
+
+
+
 
                 <!-- Heart icon for Add to Favorites with Font Awesome icon -->
                 <button type="button" id="add-to-favorites">
@@ -151,4 +159,42 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript to update the URL parameters based on user selection
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const customSizeInput = document.getElementById('custom-size');
+
+    function updateURL() {
+        let selectedSize = '';
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedSize = checkbox.nextElementSibling.textContent.trim();
+            }
+        });
+        if (customSizeInput.value.trim() !== '') {
+            selectedSize = customSizeInput.value.trim();
+        }
+
+        let cakeName = '{{ cake_name }}';
+        let cakePrice = '{{ cake_price }}';
+        let url = "{% url 'checkout' %}?cake_name=" + encodeURIComponent(cakeName) + "&cake_price=" + encodeURIComponent(cakePrice) + "&cake_size=" + encodeURIComponent(selectedSize);
+        addToCartBtn.href = url;
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // Uncheck all other checkboxes when one is checked
+            checkboxes.forEach(cb => {
+                if (cb !== checkbox) {
+                    cb.checked = false;
+                }
+            });
+            updateURL();
+        });
+    });
+
+    customSizeInput.addEventListener('input', updateURL);
+</script>
 {% endblock %}

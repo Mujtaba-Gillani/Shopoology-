@@ -41,7 +41,15 @@
                                     <h5 class="card-title">{{ cake.name }}</h5>
                                     <p class="card-text">{{ cake.description }}</p>
                                     <p class="card-text">(Starting from) Rs {{ cake.price }} </p>
-                                    <a href="{% url 'cart'%}" class="btn btn-primary">Add to Cart</a>
+                                    <a href="{% url 'cart' %}?cake_name={{ cake.name }}&cake_price={{ cake.price }}" class="btn btn-primary">Add to Cart</a>
+                                    {% comment %} <form method="post" action="{% url 'cart' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="cake_id" value="{{ cake.id }}">
+                                        <input type="hidden" name="cake_size" value="1"> <!-- Example: default cake size -->
+                                        <input type="hidden" name="cake_name" value="{{ cake.name }}">
+                                        <input type="hidden" name="cake_price" value="{{ cake.price }}">
+                                        <button type="submit" class="btn btn-primary">Add to cCart</button>
+                                    </form> {% endcomment %}
                                 </div>
                             </div>
                         </div>
@@ -62,7 +70,7 @@
                                     <h5 class="card-title">{{ cake.name }}</h5>
                                     <p class="card-text">{{ cake.description }}</p>
                                     <p class="card-text">(Starting from) Rs {{ cake.price }} </p>
-                                    <a href="{% url 'cart'%}" class="btn btn-primary">Add to Cart</a>
+                                    <a href="{% url 'cart' %}?cake_name={{ cake.name }}&cake_price={{ cake.price }}" class="btn btn-primary">Add to Cart</a>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +91,7 @@
                                     <h5 class="card-title">{{ cake.name }}</h5>
                                     <p class="card-text">{{ cake.description }}</p>
                                     <p class="card-text">(Starting from) Rs {{ cake.price }} </p>
-                                    <a href="{% url 'cart'%}" class="btn btn-primary">Add to Cart</a>
+                                    <a href="{% url 'cart' %}?cake_name={{ cake.name }}&cake_price={{ cake.price }}" class="btn btn-primary">Add to Cart</a>
                                 </div>
                             </div>
                         </div>
