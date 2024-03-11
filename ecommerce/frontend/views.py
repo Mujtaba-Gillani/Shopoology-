@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Cake, Services
+from .models import Cake, Services, Flavor
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib import messages
@@ -25,11 +25,11 @@ def about_us(request):
 
 def menu(request):
     birthday_cakes = Cake.objects.filter(type='Birthday', active=True)
-    wedding_cakes = Cake.objects.filter(type='Wedding', active=True)
+    cup_cakes= Cake.objects.filter(type='Cupcakes', active=True)
     custom_cakes = Cake.objects.filter(type='Custom', active=True)
     context = {
         'birthday_cakes': birthday_cakes,
-        'wedding_cakes': wedding_cakes,
+        'cup_cakes': cup_cakes,
         'custom_cakes': custom_cakes,
     }
     return render(request, 'frontend/menu.html', context)
@@ -68,10 +68,20 @@ class AddToCartView(View):
     def get(self, request, *args, **kwargs):
         cake_name = request.GET.get('cake_name')
         cake_price = request.GET.get('cake_price')
+        cake_desc =request.GET.get('cake_desc')
+        cake_type=request.GET.get('cake_type')
+        
+        if cake_type in ['Cupcakes', 'Custom']:
+            flavor=Flavor.objects.all()
+        else:
+            flavor=None
 
         context = {
             'cake_name': cake_name,
             'cake_price': cake_price,
+            'cake_desc': cake_desc,
+            'cake_type':cake_type,
+            'flavor': flavor,
         }
         print(context)  
 
@@ -82,6 +92,8 @@ class AddToCartView(View):
         cake_size = self.request.POST.get('cake_size')
         cake_name = request.POST.get('cake_name')
         cake_price = request.POST.get('cake_price')
+        cake_desc =request.POST.get('cake_desc')
+        cake_flavor=request.POST.get('flavor')
         cake = get_object_or_404(Cake, pk=cake_id)
 
 
@@ -98,6 +110,8 @@ class AddToCartView(View):
             'cake_price': cake_price_str,
             'size': cake_size,
             'price': total_amount_str,
+            'cake_desc': cake_desc,
+            'flavor':cake_flavor,
         }
         self.request.session['cart'] = cart
 

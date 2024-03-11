@@ -1,4 +1,5 @@
 {% extends 'frontend/main.html' %} {% load static %} {% block title %}Cart{% endblock %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/frontend/css/cart.css' %}">
 <div class="container" style="background-color:#c38edb11; border-radius:10px;">
     <div class="row cart-main-content">
         <div class="breadcrum">
@@ -23,17 +24,17 @@
                 </div>
 
 
-                <div class="top-right">
+                <!-- <div class="top-right">
                     <div class="rating-content">
                         <div class="rating-description">
                             <span class="shopify-product-reviews-badge" data-id="1471374753858"></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <div class="description">
-                Summer of love with light peach base and contrasting floral design on the top.
+                {{cake_desc}}
             </div>
             <div class="size">
                 <div class="card">
@@ -125,19 +126,21 @@
             <div class="text-on-cake">
                 <h4>Text on cake </h4>
                 <label for="cake-message">Write text here:</label> <br>
-                <input type="text" id="cake-message" name="cake-message" placeholder="Type your message here" maxlength="50">
+                <input type="text" id="cake-message" name="cake-message" class="input-style" placeholder="Type your message here" maxlength="100">
             </div>
+            {% if flavor %}
             <div class="flavors">
                 <h4>Choose Flavor:</h4>
                 <label for="flavor-select">Select Flavor:</label>
-                <select id="flavor-select" name="flavor-select" required>
-                    <option value="vanilla">Vanilla</option>
-                    <option value="chocolate">Chocolate</option>
-                    <option value="strawberry">Strawberry</option>
-                    <option value="red-velvet">Red Velvet</option>
-                    <!-- Add more options for each flavor -->
+                <select id="flavor-select" name="flavor-select" class="select-style" required>
+                    {% for flavors in flavor %}
+                    <option value="{{ flavors.id }}">{{ flavors.name }}</option>
+                    {% endfor %}
                 </select>
             </div>
+            {% endif %}
+
+
             <div class="action-buttons">
                 <!-- Add to Cart button with Font Awesome icon -->
                 <!-- <a href="{% url 'checkout' %}?cake_name={{ cake_name }}&cake_price={{ cake_price }}&cake_size={{ selected_size }}" class="btn btn-primary">
